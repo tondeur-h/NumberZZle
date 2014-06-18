@@ -1,0 +1,94 @@
+@startuml
+title <b>NumberZZle</b>
+
+JFrame<|--Numberzzle
+Interface ActionListener<|--Numberzzle
+Interface WindowListener<|--Numberzzle
+Numberzzle "1" <-- "1" Plateau
+Score*--Plateau
+Grille*--Plateau
+Interface MouseMotionListener<|--Plateau
+Interface MouseListener<|--Plateau
+Interface Runnable<|--Plateau
+Plateau "1" *-- "1" Numberzzle : possede
+
+skinparam classAttributeIconSize 0
+class Grille {
+    int valeur
+    boolean select
+    Grille(int v,boolean b)    
+    + int getVal()
+    + void setVal(int v)
+    + boolean getSelect()
+    + void setSelect(boolean b)
+}
+
+class Score {
+    int valeur
+    String nom
+
+    Score(int v,String n)
+    + void setVal(int v)
+    + void setNom(String n)
+    + int getVal()
+    + String getNom()
+}
+
+class Numberzzle{
+
+    Plateau plateau
+    JMenuItem jouer
+    
+    Numberzzle()
+    - JMenuBar monMenu()
+    + void menuOff()
+    + void menuOn()
+    + {static} void main(String[] args)
+    - void actionPerformed(ActionEvent e)
+    - void windowOpened(WindowEvent e)
+    - void windowClosing(WindowEvent e)
+    - void windowClosed(WindowEvent e)
+    - void windowIconified(WindowEvent e)
+    - void windowDeiconified(WindowEvent e)
+    - void windowActivated(WindowEvent e)
+    - void windowDeactivated(WindowEvent e)
+}
+
+class Plateau{    
+    ArrayList grille
+    ArrayList score
+    boolean jouer=false
+    Thread t
+    int temps=120
+    int tempSum=0
+    int dx=50
+    int dy=100
+    int vrecherche=10
+    int maxscore=10
+    boolean good=false
+    Numberzzle nbz
+     
+    Plateau(Numberzzle nbze)
+    - void lire_score()    
+    - void save_score()
+    + void nouveau()
+    - String completeZero(int v)
+    - String repTime(int v)
+    + void paintComponent(Graphics g)
+    - int x2cx(int xc)
+    - int y2cy(int yc)
+    + void mouseDragged(MouseEvent e)
+    - void CalcSum()
+    + void mouseMoved(MouseEvent e)
+    + void run()
+    + void mouseClicked(MouseEvent e)
+    + void mousePressed(MouseEvent e)
+    + void mouseReleased(MouseEvent e)
+    + void mouseEntered(MouseEvent e)
+    + void mouseExited(MouseEvent e)
+    - void verif_jeu()
+    - void maxScore()
+}
+
+
+@enduml
